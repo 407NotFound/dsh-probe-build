@@ -9,14 +9,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: install
+      - name: toolchain
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq clang lld llvm
-      - name: discover
+      - name: build
         run: |
-          clang --version | head -2
-          ls -l /usr/bin/ld64.lld* /usr/lib/llvm-*/bin/ld64.lld 2>/dev/null || true
-          printf 'int f(void){return 1;}\n' > t.c
-          clang -target arm64-apple-ios14.0 -c t.c -o t.o && echo "COMPILE_OK"
-          file t.o
+          set -x
+          clang -target arm64-apple-ios14.0 -dynamiclib -nostdlib -fblocks -O2 \
+                -Wl,-install_name,@rpath/Probe.dylib -Wl,-undefined,dynamic_lookup \
+                -fuse-ld=/usr/bin/ld64.lld \
+                -o Probe.dylib probe_min.c || echo BUILD_FAILED
+          ls -l Probe.dylib 2>/dev/null || true
+          file Probe.dylib 2>/dev/null || true
+      - name: publish
+        if: success()
+        run: |
+          if [ -f Probe.dylib ]; then
+            base64 -w0 Probe.dylib > Probe.dylib.b64
+            git config user.name b; git config user.email b@b
+            git add Probe.dylib Probe.dylib.b64
+            git commit -m "build $(date -u +%H%M%S)" || true
+            git push
+          else
+            echo "no dylib"; exit 1
+          fi
