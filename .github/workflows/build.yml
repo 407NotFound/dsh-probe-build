@@ -6,12 +6,7 @@ permissions:
   contents: write
 jobs:
   b:
-    runs-on: macos-14
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          S=$(xcrun --sdk iphoneos --show-sdk-path)
-          clang -target arm64-apple-ios14.0 -isysroot "$S" -dynamiclib -O2 -fblocks -x objective-c -framework Foundation -lobjc -Wl,-install_name,@rpath/Probe.dylib -Wl,-undefined,dynamic_lookup -o Probe.dylib probe.c
-          base64 -i Probe.dylib -o Probe.dylib.b64
-          git config user.name b; git config user.email b@b
-          git add .; git commit -m b; git push
+      - run: echo "hello from $(uname -a)"; clang --version | head -2; ls /usr/bin | grep -i lld | head
