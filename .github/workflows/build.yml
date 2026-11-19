@@ -9,4 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo "hello from $(uname -a)"; clang --version | head -2; ls /usr/bin | grep -i lld | head
+      - name: install
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq clang lld llvm
+      - name: discover
+        run: |
+          clang --version | head -2
+          ls -l /usr/bin/ld64.lld* /usr/lib/llvm-*/bin/ld64.lld 2>/dev/null || true
+          printf 'int f(void){return 1;}\n' > t.c
+          clang -target arm64-apple-ios14.0 -c t.c -o t.o && echo "COMPILE_OK"
+          file t.o
