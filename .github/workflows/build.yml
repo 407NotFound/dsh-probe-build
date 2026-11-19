@@ -17,20 +17,16 @@ jobs:
         run: |
           set -x
           clang -target arm64-apple-ios14.0 -dynamiclib -nostdlib -fblocks -O2 \
+                -Wl,-arch,arm64 -Wl,-platform_version,ios,14.0,14.0 \
                 -Wl,-install_name,@rpath/Probe.dylib -Wl,-undefined,dynamic_lookup \
                 -fuse-ld=/usr/bin/ld64.lld \
-                -o Probe.dylib probe_min.c || echo BUILD_FAILED
-          ls -l Probe.dylib 2>/dev/null || true
-          file Probe.dylib 2>/dev/null || true
+                -o Probe.dylib probe_min.c
+          ls -l Probe.dylib
+          file Probe.dylib
       - name: publish
-        if: success()
         run: |
-          if [ -f Probe.dylib ]; then
-            base64 -w0 Probe.dylib > Probe.dylib.b64
-            git config user.name b; git config user.email b@b
-            git add Probe.dylib Probe.dylib.b64
-            git commit -m "build $(date -u +%H%M%S)" || true
-            git push
-          else
-            echo "no dylib"; exit 1
-          fi
+          base64 -w0 Probe.dylib > Probe.dylib.b64
+          git config user.name b; git config user.email b@b
+          git add Probe.dylib Probe.dylib.b64
+          git commit -m "build $(date -u +%H%M%S)" || true
+          git push
