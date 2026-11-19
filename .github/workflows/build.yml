@@ -1,6 +1,9 @@
 name: b
-on: [push]
-permissions: {contents: write}
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   b:
     runs-on: macos-14
