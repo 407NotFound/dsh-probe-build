@@ -9,35 +9,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: deps
+      - name: jadx
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq jadx || true
-          if ! command -v jadx >/dev/null; then
-            curl -sSL -o jadx.zip https://github.com/skylot/jadx/releases/download/v1.5.0/jadx-1.5.0.zip
-            unzip -q jadx.zip -d jadx && sudo ln -sf $PWD/jadx/bin/jadx /usr/local/bin/jadx
-          fi
-          jadx --version
-      - name: decode
-        run: base64 -d classes.dex.b64 > classes.dex && ls -l classes.dex
+          curl -sSL -o jadx.zip https://github.com/skylot/jadx/releases/download/v1.5.0/jadx-1.5.0.zip
+          unzip -q jadx.zip -d jadx
+          chmod +x jadx/bin/jadx
+          jadx/bin/jadx --version
       - name: decompile
         run: |
-          mkdir -p out
-          jadx -d out --show-bad-code classes.dex > jadx.log 2>&1 || true
-          find out -name "*.java" | wc -l
+          cp classes.dex.b64 classes.dex
+          file classes.dex
+          jadx/bin/jadx -d out --show-bad-code classes.dex > jadx.log 2>&1 || true
+          find out -name '*.java' | wc -l
       - name: report
         run: |
           {
             echo "=== files ==="
-            find out -name "*.java" | sed 's|out/||' | sort
+            find out -name '*.java' | sed 's|out/||' | sort | head -60
             echo
-            echo "=== crypto hits ==="
-            grep -rn -E "GCMParameterSpec|SecretKeySpec|IvParameterSpec|Cipher\.getInstance|doFinal|payload|decrypt|Base64" out --include=*.java | head -80
+            echo "=== crypto ==="
+            grep -rn -E "GCMParameterSpec|SecretKeySpec|IvParameterSpec|Cipher|doFinal|payload|decrypt|Base64" out --include=*.java | head -60
             echo
-            echo "=== asset / native ==="
-            grep -rn -E "assets|payload\.bin|loadLibrary|native |getAssets" out --include=*.java | head -60
+            echo "=== assets/native ==="
+            grep -rn -E "assets|payload|loadLibrary|native |getAssets" out --include=*.java | head -40
+            echo
+            echo "=== skinvpn ==="
+            sed -n '1,120p' out/sources/local/skinchanger/SkinVpnService.java 2>/dev/null
+            echo
+            echo "=== nativebridge ==="
+            sed -n '1,60p' out/sources/local/skinchanger/NativeBridge.java 2>/dev/null
           } > report.txt
-          wc -l report.txt
+          wc -c report.txt
       - name: publish
         run: |
           rm -f classes.dex
