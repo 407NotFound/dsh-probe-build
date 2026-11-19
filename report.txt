@@ -1,0 +1,295 @@
+=== files ===
+sources/com/github/shadowsocks/bg/Tun2proxy.java
+sources/f/a.java
+sources/f/b.java
+sources/f/c.java
+sources/f/d.java
+sources/f/e.java
+sources/f/f.java
+sources/f/g.java
+sources/f/h.java
+sources/f/i.java
+sources/f/j.java
+sources/f/k.java
+sources/f/l.java
+sources/f/m.java
+sources/f/n.java
+sources/f/o.java
+sources/f/p.java
+sources/f/q.java
+sources/f/r.java
+sources/f/s.java
+sources/f/t.java
+sources/f/u.java
+sources/f/v.java
+sources/f/w.java
+sources/f/x.java
+sources/f/y.java
+sources/f/z.java
+sources/local/skinchanger/A.java
+sources/local/skinchanger/AbstractC0002c.java
+sources/local/skinchanger/AbstractC0007h.java
+sources/local/skinchanger/AbstractC0009j.java
+sources/local/skinchanger/AbstractC0010k.java
+sources/local/skinchanger/AbstractC0012m.java
+sources/local/skinchanger/B.java
+sources/local/skinchanger/C.java
+sources/local/skinchanger/C0001b.java
+sources/local/skinchanger/C0003d.java
+sources/local/skinchanger/C0004e.java
+sources/local/skinchanger/C0005f.java
+sources/local/skinchanger/C0006g.java
+sources/local/skinchanger/C0008i.java
+sources/local/skinchanger/C0011l.java
+sources/local/skinchanger/C0013n.java
+sources/local/skinchanger/C0014o.java
+sources/local/skinchanger/C0015p.java
+sources/local/skinchanger/D.java
+sources/local/skinchanger/E.java
+sources/local/skinchanger/F.java
+sources/local/skinchanger/FluxApplication.java
+sources/local/skinchanger/G.java
+sources/local/skinchanger/H.java
+sources/local/skinchanger/I.java
+sources/local/skinchanger/J.java
+sources/local/skinchanger/K.java
+sources/local/skinchanger/L.java
+sources/local/skinchanger/M.java
+sources/local/skinchanger/MainActivity.java
+sources/local/skinchanger/N.java
+sources/local/skinchanger/NativeBridge.java
+sources/local/skinchanger/O.java
+
+=== crypto ===
+out/sources/local/skinchanger/C0001b.java:8:import android.util.Base64;
+out/sources/local/skinchanger/C0001b.java:19:import javax.crypto.Cipher;
+out/sources/local/skinchanger/C0001b.java:22:import javax.crypto.spec.GCMParameterSpec;
+out/sources/local/skinchanger/C0001b.java:412:                                            int flow10 = NativeBridge.flow(number, NativeBridge.lease(Base64.decode(jSONObject.getString(strArr2[35]), i4), Base64.decode(jSONObject.getString(strArr2[36]), i4)) > 0 ? 1896945980 : -817805300);
+out/sources/local/skinchanger/C0001b.java:608:                    byte[] decode = Base64.decode(str, 2);
+out/sources/local/skinchanger/C0001b.java:615:                            Cipher cipher = Cipher.getInstance(AbstractC0010k.a[5]);
+out/sources/local/skinchanger/C0001b.java:616:                            cipher.init(2, e(), new GCMParameterSpec(128, decode, 0, 12));
+out/sources/local/skinchanger/C0001b.java:617:                            String str2 = new String(cipher.doFinal(decode, 12, decode.length - 12), StandardCharsets.UTF_8);
+out/sources/local/skinchanger/C0001b.java:657:        Cipher cipher = Cipher.getInstance(strArr[5]);
+out/sources/local/skinchanger/C0001b.java:659:        byte[] doFinal = cipher.doFinal(this.e.getBytes(StandardCharsets.UTF_8));
+out/sources/local/skinchanger/C0001b.java:662:        int length2 = doFinal.length;
+out/sources/local/skinchanger/C0001b.java:665:        System.arraycopy(doFinal, 0, bArr, iv.length, doFinal.length);
+out/sources/local/skinchanger/C0001b.java:666:        this.a.getSharedPreferences(strArr[3], 0).edit().putString(strArr[4], Base64.encodeToString(bArr, 2)).apply();
+out/sources/local/skinchanger/AbstractC0002c.java:8:import android.util.Base64;
+out/sources/local/skinchanger/AbstractC0002c.java:388:                            JSONObject jSONObject = new JSONObject(new String(Base64.decode(context.getString((int) AbstractC0009j.a[8]), 2), StandardCharsets.UTF_8));
+
+=== assets/native ===
+out/sources/com/github/shadowsocks/bg/Tun2proxy.java:6:        System.loadLibrary("tun2proxy");
+out/sources/com/github/shadowsocks/bg/Tun2proxy.java:12:    public static native int run(String str, char c);
+out/sources/com/github/shadowsocks/bg/Tun2proxy.java:14:    public static native int stop();
+out/sources/local/skinchanger/C0011l.java:1799:                        this.i = NativeBridge.create(getContext().getAssets(), this.f20f, false, sharedPreferences.getInt(strArr[179], 0), sharedPreferences.getInt(strArr[66], 11), sharedPreferences.getString(strArr[181], strArr[0]));
+out/sources/local/skinchanger/r.java:15:            byte[] asset = NativeBridge.asset(contextWrapper.getAssets(), str);
+out/sources/local/skinchanger/NativeBridge.java:11:        System.loadLibrary("fluxui");
+out/sources/local/skinchanger/NativeBridge.java:14:    public static native String[] actions(long j);
+out/sources/local/skinchanger/NativeBridge.java:16:    public static native byte[] asset(AssetManager assetManager, String str);
+out/sources/local/skinchanger/NativeBridge.java:18:    public static native void backdrop(long j, boolean z);
+out/sources/local/skinchanger/NativeBridge.java:20:    public static native void bind(Context context);
+out/sources/local/skinchanger/NativeBridge.java:22:    public static native String[] challenge(Context context, String str, String str2);
+out/sources/local/skinchanger/NativeBridge.java:24:    public static native int classify(byte[] bArr);
+out/sources/local/skinchanger/NativeBridge.java:26:    public static native long create(AssetManager assetManager, byte[] bArr, boolean z, int i, int i2, String str);
+out/sources/local/skinchanger/NativeBridge.java:28:    public static native void destroy(long j);
+out/sources/local/skinchanger/NativeBridge.java:36:    public static native boolean glove(int i);
+out/sources/local/skinchanger/NativeBridge.java:38:    public static native float half(int i);
+out/sources/local/skinchanger/NativeBridge.java:40:    public static native void input(long j, int i, String str);
+out/sources/local/skinchanger/NativeBridge.java:42:    public static native int[] inventory(byte[] bArr);
+out/sources/local/skinchanger/NativeBridge.java:44:    public static native long lease(byte[] bArr, byte[] bArr2);
+out/sources/local/skinchanger/NativeBridge.java:46:    public static native boolean licensed();
+out/sources/local/skinchanger/NativeBridge.java:53:    public static native long[] numbers();
+out/sources/local/skinchanger/NativeBridge.java:55:    public static native boolean render(long j);
+out/sources/local/skinchanger/NativeBridge.java:57:    public static native void revoke();
+out/sources/local/skinchanger/NativeBridge.java:59:    public static native void scroll(long j, float f2);
+out/sources/local/skinchanger/NativeBridge.java:61:    public static native void state(long j, byte[] bArr);
+out/sources/local/skinchanger/NativeBridge.java:64:    public static native String[] strings();
+out/sources/local/skinchanger/NativeBridge.java:66:    public static native void surface(long j, int i, int i2, boolean z);
+out/sources/local/skinchanger/NativeBridge.java:72:    public static native void touch(long j, int i, float f2, float f3);
+out/sources/local/skinchanger/NativeBridge.java:74:    public static native String unescape(String str);
+out/sources/local/skinchanger/NativeBridge.java:76:    public static native void verify(String str, byte[] bArr);
+out/sources/local/skinchanger/NativeBridge.java:78:    public static native void visible(long j, boolean z);
+
+=== skinvpn ===
+package local.skinchanger;
+
+import android.app.NotificationManager;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.LinkProperties;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.VpnService;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.ParcelFileDescriptor;
+import android.os.Process;
+import android.os.RemoteException;
+import com.github.shadowsocks.bg.Tun2proxy;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.security.GeneralSecurityException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+
+/* loaded from: /home/runner/work/dsh-probe-build/dsh-probe-build/classes.dex */
+public final class SkinVpnService extends VpnService {
+    public final Handler a = new Handler(Looper.getMainLooper());
+    public final ExecutorService b = Executors.newSingleThreadExecutor();
+    public final AtomicInteger c = new AtomicInteger();
+    public final HashSet d = new HashSet();
+    public final Messenger e = new Messenger(new Handler(Looper.getMainLooper(), new Handler.Callback() { // from class: local.skinchanger.SkinVpnService$$ExternalSyntheticLambda1
+        @Override // android.os.Handler.Callback
+        public final boolean handleMessage(Message message) {
+            return SkinVpnService.this.a(message);
+        }
+    }));
+
+    /* renamed from: f, reason: collision with root package name */
+    public String f15f;
+    public String g;
+    public u h;
+    public ParcelFileDescriptor i;
+    public C0008i j;
+    public boolean k;
+    public boolean l;
+    public volatile boolean m;
+    public boolean n;
+    public final v o;
+
+    static {
+        int i = NativeBridge.a;
+        long j = AbstractC0009j.a[83];
+    }
+
+    public SkinVpnService() {
+        int i = NativeBridge.a;
+        String[] strArr = AbstractC0010k.a;
+        this.f15f = strArr[368];
+        this.g = strArr[369];
+        this.o = new v(this);
+    }
+
+    public final void a() {
+        long number = NativeBridge.number(289);
+        C0008i c0008i = this.j;
+        int flow = NativeBridge.flow(number, c0008i != null ? -1570090497 : 1775171691);
+        if (flow == -508740251) {
+            c0008i.close();
+            this.j = null;
+        } else if (flow != 719066324) {
+            throw new IllegalStateException();
+        }
+        ParcelFileDescriptor parcelFileDescriptor = this.i;
+        int flow2 = NativeBridge.flow(number, parcelFileDescriptor != null ? -1869067644 : 1253006997);
+        if (flow2 != -1115687998) {
+            if (flow2 != 1738019094) {
+                throw new IllegalStateException();
+            }
+        } else {
+            try {
+                parcelFileDescriptor.close();
+            } catch (IOException unused) {
+            }
+            this.i = null;
+        }
+    }
+
+    /* JADX WARN: Failed to find 'out' block for switch in B:3:0x0013. Please report as an issue. */
+    public final void a(int i) {
+        int i2;
+        long number = NativeBridge.number(293);
+        int flow = NativeBridge.flow(number, 114617292);
+        String[] strArr = null;
+        String str = null;
+        String str2 = null;
+        while (true) {
+            switch (flow) {
+                case -1379285639:
+                    str2 = strArr[410];
+                    flow = NativeBridge.flow(number, 862973971);
+                case -1304475483:
+                    a(str, str2);
+                    c();
+                    return;
+                case -898483202:
+                    this.a.removeCallbacks(this.o);
+                    a();
+                    strArr = AbstractC0010k.a;
+                    str = strArr[398];
+                    i2 = strArr[397].equals(this.f15f) ? 1852250841 : -1489995886;
+                    flow = NativeBridge.flow(number, i2);
+
+=== nativebridge ===
+package local.skinchanger;
+
+import android.content.Context;
+import android.content.res.AssetManager;
+
+/* loaded from: /home/runner/work/dsh-probe-build/dsh-probe-build/classes.dex */
+public final class NativeBridge {
+    public static final /* synthetic */ int a = 0;
+
+    static {
+        System.loadLibrary("fluxui");
+    }
+
+    public static native String[] actions(long j);
+
+    public static native byte[] asset(AssetManager assetManager, String str);
+
+    public static native void backdrop(long j, boolean z);
+
+    public static native void bind(Context context);
+
+    public static native String[] challenge(Context context, String str, String str2);
+
+    public static native int classify(byte[] bArr);
+
+    public static native long create(AssetManager assetManager, byte[] bArr, boolean z, int i, int i2, String str);
+
+    public static native void destroy(long j);
+
+    public static int flow(long j, int i) {
+        int i2 = i ^ ((int) j);
+        int i3 = (int) (j >>> 32);
+        return Integer.rotateLeft(i2, i3 & 31) + i3;
+    }
+
+    public static native boolean glove(int i);
+
+    public static native float half(int i);
+
+    public static native void input(long j, int i, String str);
+
+    public static native int[] inventory(byte[] bArr);
+
+    public static native long lease(byte[] bArr, byte[] bArr2);
+
+    public static native boolean licensed();
+
+    public static long number(int i) {
+        return AbstractC0009j.a[i];
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public static native long[] numbers();
+
+    public static native boolean render(long j);
+
+    public static native void revoke();
+
+    public static native void scroll(long j, float f2);
+
